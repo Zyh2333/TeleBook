@@ -72,6 +72,5 @@ public class VerifyCodeUtil {
         Random ran = new Random();
         return new Color(ran.nextInt(256),
                 ran.nextInt(256), ran.nextInt(256));
-
     }
 }
