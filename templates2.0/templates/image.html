@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>个人主页</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+    <style type="text/css">
+        /* Chart.js */
+body{background: url('7.jpg');}
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+</head>
+
+<body onload="InitThis();">
+<div th:replace="commons/bar1::topbar"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="commons/bar1::#sidebar(activeUri='main.html')"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="chartjs-size-monitor"
+                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                <div class="chartjs-size-monitor-expand"
+                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink"
+                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <div class="mb-md-0">
+                    <div>
+                        <div id="head" class="circle"
+                             style="width: 100px;height: 100px;overflow: hidden;border-radius: 50px;border: 1px solid #0062CC;">
+                            <!--从后端获取到model传递的相对路径通过资源映射到绝对路径 -->
+                            <img id="myuserhead" src=".." th:src="@{${filename}}"
+                                 style="width: 100px;height: 100px;border-radius: 50px;background-color: white;">
+                        </div>
+
+                    </div>
+                    <div class="btn-group change-avatar col-sm-1">
+                        <form th:action="@{/main/imageUpload}" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file">
+                            <br>
+                            <input type="submit" value="上传" class="btn btn-success">
+                        </form>
+                    </div>
+                </div>
+                <a class="btn btn-sm btn-primary" th:href="@{/back}"><font color="white">返回</font></a>
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="../static/asserts/js/jquery-3.2.1.slim.min.js"></script>
+<script type="text/javascript" src="../static/asserts/js/popper.min.js"></script>
+<script type="text/javascript" src="../static/asserts/js/bootstrap.min.js"></script>
+
+<!-- Icons -->
+<script type="text/javascript" src="../static/asserts/js/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<!-- Graphs -->
+<script type="text/javascript" src="../static/asserts/js/Chart.min.js"></script>
+
+<script type="text/javascript">
+    var head;
+    var mousePressed = false;
+    var lastX, lastY;
+    var ctx;
+
+    function choosehead(currentitem) {
+        head.src = currentitem.src;
+        alert("头像更改成功");
+    }
+
+    function InitThis() {
+        ctx = document.getElementById('myCanvas').getContext("2d");
+        head = document.getElementById('myuserhead');
+
+        $('#myCanvas').mousedown(function (e) {
+            mousePressed = true;
+            Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
+        });
+
+        $('#myCanvas').mousemove(function (e) {
+            if (mousePressed) {
+                Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
+            }
+        });
+
+        $('#myCanvas').mouseup(function (e) {
+            mousePressed = false;
+        });
+        $('#myCanvas').mouseleave(function (e) {
+            mousePressed = false;
+        });
+    }
+
+    function Draw(x, y, isDown) {
+        if (isDown) {
+            ctx.beginPath();
+            ctx.strokeStyle = $('#selColor').val();
+            ctx.lineWidth = $('#selWidth').val();
+            ctx.lineJoin = "round";
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.closePath();
+            ctx.stroke();
+        }
+        lastX = x;
+        lastY = y;
+    }
+
+    function clearArea() {
+        // Use the identity matrix while clearing the canvas
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+
+</script>
+
+</body>
+
+</html>
