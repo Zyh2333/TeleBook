@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.whu.zhuyuhan.demo1.dao.IUserDao">
+    <select id="logIn" resultType="cn.edu.whu.zhuyuhan.demo1.entity.User">
+        select * from users where userName=#{userName};
+    </select>
+    <insert id="signIn">
+        insert into users values (#{userName},#{passWord});
+    </insert>
+    <update id="updateImage" parameterType="java.lang.String">
+        update users set image=#{path} where userName=#{userName};
+    </update>
+    <select id="loadImage" resultType="java.lang.String">
+        select image from users where userName=#{arg0};
+    </select>
+</mapper>

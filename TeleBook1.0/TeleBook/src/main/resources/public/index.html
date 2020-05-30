@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网页电话薄</title>
+		<script type="text/javascript" src="js/doc.js"></script>
+	</head>
+	<body>
+		<div >
+			<table id="all_tele" border="1">
+				<tr>
+					<th>姓名</th>
+					<th>电话</th>
+					<th>操作</th>
+				</tr>
+			</table>
+			<br/>
+			<hr />
+		</div>
+		
+		<div >
+			<br/>
+			<label for="name">姓名：</label><br/>
+			<input type="text" id="name" name="name" class="text" /><br />
+			<label for="telphone" >电话号码：</label><br/>
+			<input type="text" id="telphone" name="telphone" /><br /><br/>
+			<input type="button" onclick="save()" value="新增记录" />
+			<input type="button" onclick="reset1()" value="重置"/><br/>
+			<hr />
+		</div>
+		<div >
+			<label for="search_name">输入姓名：</label>
+			<input type="text" id="search_name" name="search_name" />
+			<input type="button"  value="查找电话" onclick="findItem()"/>
+			<p id="result"><br></p>
+		    <br /><br /><br />
+		</div>
+		
+	</body>
+	
+	
+
+</html>

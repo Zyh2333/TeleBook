@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.whu.zhuyuhan.demo1.dao.IFriendDao">
+    <select id="getAll" resultType="cn.edu.whu.zhuyuhan.demo1.entity.Friend">
+        select * from friend;
+    </select>
+    <insert id="putFriend" parameterType="cn.edu.whu.zhuyuhan.demo1.entity.Friend">
+        insert into friend(id,name,schoolName,email,gender,birthString,tel,userName)values(#{id},#{name},#{schoolName},#{email},#{gender},#{birthString},#{tel}.#{userName});
+    </insert>
+    <delete id="deleteById" parameterType="cn.edu.whu.zhuyuhan.demo1.entity.Friend">
+        delete from friend where id=#{arg0};
+    </delete>
+    <select id="getById" resultType="cn.edu.whu.zhuyuhan.demo1.entity.Friend">
+        select * from friend where id=#{arg0};
+    </select>
+    <update id="editFriend" parameterType="cn.edu.whu.zhuyuhan.demo1.entity.Friend">
+        update friend set
+                          id=#{id},name=#{name},schoolName=#{schoolName},email=#{email},gender=#{gender},birthString=#{birthString},tel=#{tel}
+                      where id=#{id};
+    </update>
+    <select id="getAll" resultType="cn.edu.whu.zhuyuhan.demo1.entity.Friend">
+        select * from friend where userName=#{arg0};
+    </select>
+</mapper>
