@@ -2,13 +2,21 @@ package cn.edu.whu.zhuyuhan.demo1.controller;
 
 import cn.edu.whu.zhuyuhan.demo1.dao.IMessageDao;
 import cn.edu.whu.zhuyuhan.demo1.entity.Message;
-import org.apache.ibatis.annotations.Insert;
+import cn.edu.whu.zhuyuhan.demo1.util.VerifyCodeUtil;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Date;
 
@@ -50,5 +58,23 @@ public class MessageController {
         String userName = message.getUserName();
         System.out.println("用户"+userName+"删去了留言："+message);
         return "redirect:/message";
+    }
+
+    @RequestMapping(value = "/message/background")
+    public void returnBackground(HttpServletResponse response){
+        System.out.println("...");
+        try {
+            int i = 1;
+            FileInputStream inputStream = new FileInputStream(new File("classpath:/static/asserts/img/back1.jpg"));
+            BufferedImage bufferedImage = null;
+            bufferedImage = ImageIO.read(inputStream);
+            response.setContentType("image/png");//必须设置响应内容类型为图片，否则前台不识别
+            OutputStream os = response.getOutputStream(); //获取文件输出流
+            ImageIO.write(bufferedImage, "png", os);//输出图片流
+            os.flush();
+            os.close();//关闭流
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

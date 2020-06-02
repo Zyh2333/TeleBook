@@ -41,11 +41,12 @@
 	        animation: chartjs-render-animation 0.001s;
 	    }
 		
-		
-		
+		body .messages{
+			list-style: inside url('[[@{/asserts/img/Bookmark.png}]]');
+			float: left;
+			display: block;
+		}
 	</style>
-	
-	
 </head>
 
 <body >
@@ -62,11 +63,15 @@
 			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 				<h1 class="h2">留言板</h1>
 			</div>
-			<div class="my-4 chartjs-render-monitor" id="mytext" width="924" height="300" style="display: block; width: 924px; height: 300px; border: 1px solid black;overflow: scroll;background-image: url('/asserts/img/backa.jpg');">
-				<div th:each="message:${messages}"  style="width: 300px;height: 60px;border-radius: 280px;border: 1px solid #0062CC;text-align: center;line-height: 30px;background-image: url('/asserts/img/back1.jpg');">
-					<span th:text="${#dates.format(message.getDate(),'yyyy-MM-dd')}")></span> <span th:text="${message.getUserName()}"></span> <span th:text="${message.getContext()}"></span>
-					<br/>
-					<a th:href="@{/messagesDelete/}+${message.getId()}">删除</a>							
+			<div class="my-4 chartjs-render-monitor" id="mytext" width="924" height="300" style="display: block; width: 924px; height: 300px;background: white; border: 1px solid black;overflow: scroll;">
+				<div id="messageboard">
+					<ui class="messages">
+						<li th:each="message:${messages}">
+							<p>
+								<span th:text="${#dates.format(message.getDate(),'yyyy-MM-dd')}"></span> <span th:text="${message.getUserName()}"></span> <span th:text="${message.getContext()}"></span>  <a class="btn btn-sm btn-primary btn-danger" th:href="@{/messagesDelete/}+${message.getId()}">删除</a>
+							</p>
+						</li>
+					</ui>
 				</div>
 			</div>
 			<br/>
@@ -94,7 +99,7 @@
 <script>
     feather.replace()
 </script>
-<script type="text/javascript">
+<script>
 
 </script>
 </body>

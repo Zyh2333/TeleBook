@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	<style type="text/css">
+		.text-center{
+			width: 370px;
+			height:490px;
+			border: solid rgb(238,238,238) 2px;
+			background-color: whitesmoke;
+		}
+		body{
+			padding: 0;
+			margin: 0;
+			background: url('[[@{/asserts/img/8.png}]]') 0 0 no-repeat scroll transparent;
+			background-size: cover;
+		}
+
+    </style>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>[[#{login.title}]]</title>
+		<!-- 使用了webjars之后似乎不受路径限制，否则再次跳转至该页面将会丢失css样式-->
+		<link href="../static/asserts/css/bootstrap.min.css" th:href="@{/asserts/css/bootstrap.min.css}" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="../static/asserts/css/signin.css" th:href="@{/asserts/css/signin.css}" rel="stylesheet">
+
+	</head>
+
+	<body>
+<div class="myd1"></div>
+		<style type="text/css">
+
+					.myd1{
+						margin: 0px;
+						padding: 0px;
+						z-index: -1;
+						width: 53rem;
+						height:35rem;
+						background-image: url('[[@{/asserts/img/71.jpg}]]');
+						background-repeat: no-repeat;
+						background-size: cover;
+					}
+				</style>
+
+		<div class="text-center">
+			<form class="form-signin" action="dashboard.html" th:action="@{/user/login/}" method="post">
+				<img class="mb-4" src="" alt="" width="72" height="72">
+				<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">请登录</h1>
+				<!--判断-->
+				<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+				<label class="sr-only" th:text="#{login.userName}">Username</label>
+				<input type="text" name="userName" class="form-control" placeholder="用户名" th:placeholder="#{login.userName}" required="" autofocus="">
+				<label class="sr-only">Password</label>
+				<input type="password" name="password" class="form-control" placeholder="密码" th:placeholder="#{login.password}" required="">
+				<div class="checkbox mb-3">
+					<label><input type="checkbox" value="remember-me"> [[#{login.remember}]]</label>
+				</div>
+				<div>
+					<a href="javascript:void(0);" title="点击更换验证码">
+						<img th:src="@{/getVerifyCode}" onclick="changeCode()" class="verifyCode"/>
+					</a>
+				</div>
+				<br>
+				<input type="text" name="verifyCode" class="form-control" th:placeholder="验证码" required="">
+				<br>
+				<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.button}">登录</button>
+				<p class="mt-5 mb-3 text-muted">[[#{login.tag}]]</p>
+				<a class="btn btn-sm" th:href="@{/index.html(l='zh_CN')}">中文</a>
+				<a class="btn btn-sm" th:href="@{/index.html(l='en_US')}">English</a>
+			</form>
+		</div>
+		<style type="text/css">
+					.myd{
+						width: 13rem;
+						height:35rem;
+						background-image: url('[[@{/asserts/img/7.jpg}]]');
+						background-position:center;
+						background-repeat: no-repeat;
+						background-size: cover;
+
+					}
+				</style>
+		<div class="myd"></div>
+
+	</body>
+	<script src="../static/js/jquery.min.js" th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+	<script>
+		function changeCode() {
+			const src = "/getVerifyCode?" + new Date().getTime(); //加时间戳，防止浏览器利用缓存
+			$('.verifyCode').attr("src", src);
+		}
+	</script>
+</html>
