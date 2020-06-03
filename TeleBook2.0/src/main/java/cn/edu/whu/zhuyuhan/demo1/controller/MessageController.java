@@ -2,8 +2,6 @@ package cn.edu.whu.zhuyuhan.demo1.controller;
 
 import cn.edu.whu.zhuyuhan.demo1.dao.IMessageDao;
 import cn.edu.whu.zhuyuhan.demo1.entity.Message;
-import cn.edu.whu.zhuyuhan.demo1.util.VerifyCodeUtil;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

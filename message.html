@@ -3,43 +3,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<title>留言板</title>
-	<!-- Bootstrap core CSS -->
-	<link href="../static/asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+    <title>留言板</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
 
-	<!-- Custom styles for this template -->
-	<link href="../static/asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
-
+    <!-- Custom styles for this template -->
+    <link href="../static/asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+	
 	<style type="text/css">
-		/* Chart.js */
-		body{background: url('[[@{/asserts/img/7.jpg}]]');}
-		@-webkit-keyframes chartjs-render-animation {
-			from {
-				opacity: 0.99
-			}
-			to {
-				opacity: 1
-			}
-		}
-
-		@keyframes chartjs-render-animation {
-			from {
-				opacity: 0.99
-			}
-			to {
-				opacity: 1
-			}
-		}
-
-		.chartjs-render-monitor {
-			-webkit-animation: chartjs-render-animation 0.001s;
-			animation: chartjs-render-animation 0.001s;
-		}
+	    /* Chart.js */
+	body{background: url('[[@{/asserts/img/7.jpg}]]');}
+	    @-webkit-keyframes chartjs-render-animation {
+	        from {
+	            opacity: 0.99
+	        }
+	        to {
+	            opacity: 1
+	        }
+	    }
+	
+	    @keyframes chartjs-render-animation {
+	        from {
+	            opacity: 0.99
+	        }
+	        to {
+	            opacity: 1
+	        }
+	    }
+	
+	    .chartjs-render-monitor {
+	        -webkit-animation: chartjs-render-animation 0.001s;
+	        animation: chartjs-render-animation 0.001s;
+	    }
 		body.messages{
 			font-weight: 700;
 			color: #C6C8CA;
@@ -50,12 +50,12 @@
 			line-height: 30px;
 			background-image: url('/asserts/img/back1.jpg');
 		}
-
-
-
+		
+		
+		
 	</style>
-
-
+	
+	
 </head>
 
 <body >
@@ -64,19 +64,19 @@
 <div th:replace="commons/bar1::topbar"></div>
 
 <div class="container-fluid">
-	<div class="row">
-		<!--引入侧边栏-->
-		<div th:replace="commons/bar1::#sidebar(activeUri='message')"></div>
+    <div class="row">
+        <!--引入侧边栏-->
+        <div th:replace="commons/bar1::#sidebar(activeUri='message')"></div>
 
-		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 				<h1 class="h2">留言板</h1>
 			</div>
 			<div class="my-4 chartjs-render-monitor" id="mytext" width="924" height="300" style="display: block; width: 924px; height: 300px; border: 1px solid black;overflow-x: hidden;overflow-y: auto;float: left ;background-image: url('/asserts/img/backa.jpg');">
-				<div th:each="message:${messages}"  style="float: left;width: 300px;height: 60px;border-radius: 280px;border: 1px solid #0062CC;text-align: center;line-height: 30px;background-image: url('/asserts/img/back1.jpg');">
+				<div th:each="message:${messages}"  class="messages">
 					<span th:text="${#dates.format(message.getDate(),'yyyy-MM-dd')}")></span> <span th:text="${message.getUserName()}"></span> <span th:text="${message.getContext()}"></span>
 					<br/>
-					<a th:href="@{/messagesDelete/}+${message.getId()}"style="color: red;">删除</a>
+					<a th:href="@{/messagesDelete/}+${message.getId()}"style="color: #C6C8CA;">删除</a>
 				</div>
 			</div>
 			<br/><br/>
@@ -87,7 +87,7 @@
 					<input type="submit" value="发表" class="btn btn-success" ></input>
 				</form>
 			</div>
-
+			
 		</main>
 	</div>
 </div>
@@ -102,7 +102,7 @@
 <!-- Icons -->
 <script type="text/javascript" src="../static/asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
 <script>
-	feather.replace()
+    feather.replace()
 </script>
 <script type="text/javascript">
 

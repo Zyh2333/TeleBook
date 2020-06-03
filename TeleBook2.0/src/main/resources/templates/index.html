@@ -57,16 +57,17 @@
 				<input type="text" name="userName" class="form-control" placeholder="用户名" th:placeholder="#{login.userName}" required="" autofocus="">
 				<label class="sr-only">Password</label>
 				<input type="password" name="password" class="form-control" placeholder="密码" th:placeholder="#{login.password}" required="">
-				<div class="checkbox mb-3">
+				<!--<div class="checkbox mb-3">
 					<label><input type="checkbox" value="remember-me"> [[#{login.remember}]]</label>
-				</div>
+				</div>-->
+				<br>
 				<div>
 					<a href="javascript:void(0);" title="点击更换验证码">
 						<img th:src="@{/getVerifyCode}" onclick="changeCode()" class="verifyCode"/>
 					</a>
 				</div>
 				<br>
-				<input type="text" name="verifyCode" class="form-control" th:placeholder="验证码" required="">
+				<input type="text" name="verifyCode" class="form-control" th:placeholder="#{login.verify}" required="">
 				<br>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.button}">登录</button>
 				<p class="mt-5 mb-3 text-muted">[[#{login.tag}]]</p>
