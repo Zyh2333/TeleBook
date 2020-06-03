@@ -76,7 +76,7 @@
 				<div th:each="message:${messages}"  style="float: left;width: 300px;height: 60px;border-radius: 280px;border: 1px solid #0062CC;text-align: center;line-height: 30px;background-image: url('/asserts/img/back1.jpg');">
 					<span th:text="${#dates.format(message.getDate(),'yyyy-MM-dd')}")></span> <span th:text="${message.getUserName()}"></span> <span th:text="${message.getContext()}"></span>
 					<br/>
-					<a th:href="@{/messagesDelete/}+${message.getId()}"style="color: red;">删除</a>
+					<a th:if="${session.loginUser==message.getUserName()}" th:href="@{/messagesDelete/}+${message.getId()}"style="color: red;">删除</a>
 				</div>
 			</div>
 			<br/><br/>
