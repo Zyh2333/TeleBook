@@ -1200,3 +1200,26 @@ JS代码用来重新生成验证码，加上时间戳防止重复提交表单
 
 我真的是醉了，老是被自己的拦截器拦住图片资源，一开始还发现不了以为是thymeleaf的问题，以后应该先关掉拦截器再对Controller进行修改防止被拦截，当然还有更简便的方法就是注意url的命名规则，**无非就是因为乱命名导致拦截器工作异常**，其实不是拦截器的锅，是自己的习惯不好，以后多加注意
 
+### 学习总结 DAY12
+
+#### 1.完成留言板前后端衔接
+
+主要是css样式优化，将留言设置为书签形式，调整背景什么的，在前端寇笑宇优化的基础之上与后台进行衔接
+
+#### 每日debug
+
+最后一次debug了，发现留言谁都可以删，本打算的是只能操作自己的，于是修改如下：
+
+```html
+<div th:each="message:${messages}"  style="float: left;width: 300px;height: 60px;border-radius: 280px;border: 1px solid #0062CC;text-align: center;line-height: 30px;background-image: url('/asserts/img/back1.jpg');">
+					<span th:text="${#dates.format(message.getDate(),'yyyy-MM-dd')}")></span> <span th:text="${message.getUserName()}"></span> <span th:text="${message.getContext()}"></span>
+					<br/>
+					<a th:if="${session.loginUser==message.getUserName()}" th:href="@{/messagesDelete/}+${message.getId()}"style="color: red;">删除</a>
+				</div>
+```
+
+也就是加了个th:if标签，登录名与便签名相等时删除按钮方才生效
+
+
+
+## 完工
